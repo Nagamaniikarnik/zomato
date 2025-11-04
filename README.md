@@ -20,8 +20,10 @@ This project demonstrates the end-to-end deployment of a static web app inside a
 ---
 ### 🐳 Docker Setup
 
-**1️⃣ Build Docker Image**
+
 ```bash
+
+1️⃣ Build Docker Image
 docker build -t zomato_image .
 2️⃣ Run Container
 docker run -d -p 8080:8080 --name zomato_container zomato_image
@@ -39,9 +41,7 @@ docker-compose up --build
 Then access the web app at:
 👉 http://localhost:8080
  or http://<your-EC2-public-IP>:8080
+---
 
-##📸 Preview
 
-Home Page
-<img width="1917" height="973" alt="Screenshot 2025-11-04 182400" src="https://github.com/user-attachments/assets/05c664a6-7764-4e27-98bd-8c9e5bc4d77a" />
 
