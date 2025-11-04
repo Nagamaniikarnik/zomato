@@ -1,261 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zomato Clone</title>
-  <style>
-    /* ---------- General Styles ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: #fff;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zomato Clone</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#fff;overflow-x:hidden;}
+header{display:flex;justify-content:space-between;align-items:center;padding:15px 70px;background:white;box-shadow:0 2px 5px rgba(0,0,0,0.1);}
+.logo{font-size:28px;font-weight:700;color:#e23744;}
+nav ul{display:flex;list-style:none;gap:25px;}
+nav ul li a{text-decoration:none;color:#333;font-weight:500;cursor:pointer;transition:.3s;}
+nav ul li a:hover,.active{color:#e23744;font-weight:600;}
+section{display:none;min-height:100vh;}
+section.active{display:block;animation:fade .5s ease;}
+@keyframes fade{from{opacity:0;}to{opacity:1;}}
 
-    /* ---------- Navbar ---------- */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 80px;
-      background: #fff;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-    .navbar .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #e23744;
-    }
-    .navbar ul {
-      display: flex;
-      list-style: none;
-    }
-    .navbar ul li {
-      margin-left: 30px;
-    }
-    .navbar ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-    .navbar ul li a:hover {
-      color: #e23744;
-    }
+/* --- Home Section --- */
+.hero{height:100vh;background:url('https://freeday.in/wp-content/uploads/2020/02/zomato-pro-promo-code-membership-referral.png') center/cover no-repeat;display:flex;justify-content:center;align-items:center;position:relative;text-align:center;color:white;}
+.hero::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.5);}
+.hero-content{position:relative;z-index:2;}
+.hero-content h1{font-size:50px;font-weight:700;margin-bottom:20px;}
+.hero-content p{font-size:18px;margin-bottom:30px;}
+.search-box{display:flex;align-items:center;background:white;border-radius:50px;padding:10px;width:450px;margin:0 auto;box-shadow:0 4px 12px rgba(0,0,0,0.2);}
+.search-box input{flex:1;border:none;outline:none;padding:10px 15px;font-size:16px;border-radius:50px;}
+.search-box button{background:#e23744;color:white;border:none;padding:10px 25px;border-radius:50px;cursor:pointer;transition:.3s;}
+.search-box button:hover{background:#c82333;}
+.categories{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;padding:80px 60px;background:#f8f8f8;}
+.category{background:white;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);overflow:hidden;text-align:center;transition:.3s;}
+.category:hover{transform:translateY(-5px);}
+.category img{width:100%;height:200px;object-fit:cover;}
+.category h3{padding:15px 0;font-weight:600;color:#333;}
 
-    /* ---------- Hero Section ---------- */
-    .hero {
-  background: url('d03eec05-ef57-448e-a45c-ea0d28db391d.png') no-repeat center center/cover;
-  height: 90vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  color: #fff;
-  text-align: center;
-  position: relative;
-}
+/* --- Restaurant Section --- */
+.rest-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;padding:60px;}
+.card{background:white;border-radius:12px;overflow:hidden;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.card img{width:100%;height:200px;object-fit:cover;}
+.card h3{margin:10px;font-size:20px;}
+.card p{margin:0 10px 15px 10px;color:#555;}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.4);
-      z-index: 0;
-    }
-    .hero h1 {
-      z-index: 1;
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
-    .hero p {
-      z-index: 1;
-      font-size: 20px;
-      margin-bottom: 30px;
-    }
-    .hero input {
-      z-index: 1;
-      width: 60%;
-      padding: 12px 20px;
-      border-radius: 25px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-    }
+/* --- Reviews Section --- */
+.reviews{padding:60px;display:grid;gap:25px;}
+.review{background:white;padding:25px;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+.review h3{margin-bottom:8px;}
+.review p{color:#555;}
 
-    /* ---------- Categories ---------- */
-    .categories {
-      padding: 50px 80px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    .category-card {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
-    .category-card:hover {
-      transform: translateY(-5px);
-    }
-    .category-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-    .category-card h3 {
-      text-align: center;
-      padding: 15px;
-    }
+/* --- Contact Section --- */
+.contact{text-align:center;padding:80px 60px;}
+.contact h2{margin-bottom:20px;font-size:28px;}
+form{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:15px;}
+input,textarea{padding:12px;border:1px solid #ccc;border-radius:6px;font-size:15px;}
+button{background:#e23744;color:white;border:none;padding:12px;border-radius:6px;font-weight:600;cursor:pointer;}
+button:hover{background:#c82333;}
 
-    /* ---------- Popular Restaurants ---------- */
-    .restaurants {
-      padding: 60px 80px;
-      background-color: #fafafa;
-    }
-    .restaurants h2 {
-      margin-bottom: 30px;
-      text-align: center;
-      font-size: 28px;
-    }
-    .restaurant-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
-    .restaurant {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: #fff;
-      transition: transform 0.3s ease;
-    }
-    .restaurant:hover {
-      transform: translateY(-5px);
-    }
-    .restaurant img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .restaurant-info {
-      padding: 15px;
-    }
-    .restaurant-info h3 {
-      margin-bottom: 5px;
-    }
-    .restaurant-info p {
-      font-size: 14px;
-      color: #777;
-    }
-
-    /* ---------- Footer ---------- */
-    footer {
-      background: #e23744;
-      color: white;
-      text-align: center;
-      padding: 20px 0;
-      margin-top: 50px;
-    }
-  </style>
+footer{background:#1e1e1e;color:white;text-align:center;padding:25px 0;font-size:14px;}
+footer span{color:#e23744;font-weight:600;}
+@media(max-width:768px){header{padding:15px 20px;}nav ul{gap:10px;} .search-box{width:90%;}}
+</style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Zomato</div>
+
+<header>
+  <div class="logo">Zomato</div>
+  <nav>
     <ul>
-      <li><a href="#">Home</a></li>
-      <li><a href="#categories">Categories</a></li>
-      <li><a href="#restaurants">Restaurants</a></li>
-      <li><a href="#">Contact</a></li>
+      <li><a class="nav-link active" onclick="showSection('home')">Home</a></li>
+      <li><a class="nav-link" onclick="showSection('restaurants')">Restaurants</a></li>
+      <li><a class="nav-link" onclick="showSection('reviews')">Reviews</a></li>
+      <li><a class="nav-link" onclick="showSection('contact')">Contact</a></li>
     </ul>
   </nav>
+</header>
 
-  <!-- Hero -->
-  <section class="hero">
-    <h1>Discover the best food & drinks</h1>
-    <p>Explore restaurants, cafes, and bars near you.</p>
-    <input type="text" id="searchBox" placeholder="Search for restaurants or cuisines..." />
-  </section>
-
-  <!-- Categories -->
-  <section id="categories" class="categories">
-    <div class="category-card">
-      <img src="https://b.zmtcdn.com/data/pictures/chains/3/310083/52496f1b07a21de3d5c3bba9df6fbb47_featured_v2.jpg" alt="Breakfast">
-      <h3>Breakfast</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://b.zmtcdn.com/data/pictures/4/310084/7f6f2ac329be63a66c77d9a1c55b7e14_featured_v2.jpg" alt="Lunch">
-      <h3>Lunch</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://b.zmtcdn.com/data/pictures/6/310086/2ad6920b19cf732fa63ed6dcb681bdfc_featured_v2.jpg" alt="Dinner">
-      <h3>Dinner</h3>
-    </div>
-    <div class="category-card">
-      <img src="https://b.zmtcdn.com/data/pictures/5/310085/2e031eaa52d8c03a7e84d4a1b0b31697_featured_v2.jpg" alt="Drinks">
-      <h3>Drinks & Nightlife</h3>
-    </div>
-  </section>
-
-  <!-- Popular Restaurants -->
-  <section id="restaurants" class="restaurants">
-    <h2>Popular Restaurants</h2>
-    <div class="restaurant-list" id="restaurantList">
-      <div class="restaurant">
-        <img src="https://b.zmtcdn.com/data/pictures/7/18800397/bd3d6e36a931b17e0b1eafc53e3ef9f4_featured_v2.jpg" alt="">
-        <div class="restaurant-info">
-          <h3>Burger King</h3>
-          <p>Burgers, Fast Food • ₹300 for two</p>
-        </div>
-      </div>
-      <div class="restaurant">
-        <img src="https://b.zmtcdn.com/data/pictures/chains/1/310061/b69b1da51e19d7fa47b7e0c6e46954ad_featured_v2.jpg" alt="">
-        <div class="restaurant-info">
-          <h3>Pizza Hut</h3>
-          <p>Pizza, Italian • ₹500 for two</p>
-        </div>
-      </div>
-      <div class="restaurant">
-        <img src="https://b.zmtcdn.com/data/pictures/2/310062/2ad3ff6933b8d0fa3a52b9d4c0a06ee4_featured_v2.jpg" alt="">
-        <div class="restaurant-info">
-          <h3>KFC</h3>
-          <p>Chicken, Fast Food • ₹400 for two</p>
-        </div>
+<!-- HOME -->
+<section id="home" class="active">
+  <div class="hero">
+    <div class="hero-content">
+      <h1>Discover the best food & drinks in your city</h1>
+      <p>Order from your favorite restaurants or explore new cuisines</p>
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Search for restaurants, cuisines or dishes...">
+        <button onclick="search()">Search</button>
       </div>
     </div>
-  </section>
+  </div>
+  <div class="categories">
+    <div class="category">
+  <img src="https://b.zmtcdn.com/data/pictures/chains/1/18697301/a3f876979c7b1a123ff8d0548d774cb1.jpg" alt="Pizza & Fast Food">
+  <h3>Pizza & Fast Food</h3>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 Zomato Clone | Designed with ❤️ using HTML, CSS & JS</p>
-  </footer>
+    <div class="category">
+  <img src="https://wallpaperaccess.com/full/8734252.jpg" alt="Biryani & Indian Dishes">
+  <h3>Biryani & Indian Dishes</h3>
+</div>
 
-  <script>
-    // Simple search filter for restaurants
-    const searchBox = document.getElementById('searchBox');
-    const restaurantList = document.getElementById('restaurantList');
-    searchBox.addEventListener('input', function() {
-      const query = this.value.toLowerCase();
-      const restaurants = restaurantList.getElementsByClassName('restaurant');
-      Array.from(restaurants).forEach(rest => {
-        const name = rest.querySelector('h3').textContent.toLowerCase();
-        rest.style.display = name.includes(query) ? 'block' : 'none';
-      });
-    });
-  </script>
+    <div class="category">
+  <img src="https://b.zmtcdn.com/data/pictures/4/19187274/bec50f0b7bd0000ea7fafde8d18da0ea.jpg" alt="Juices & Beverages">
+  <h3>Juices & Beverages</h3>
+</div>
+
+    <div class="category">
+  <img src="https://b.zmtcdn.com/data/pictures/chains/3/53923/06e0e3449f73bb7cd9eeee55c73bd1ef.jpg" alt="Desserts & Ice Creams">
+  <h3>Desserts & Ice Creams</h3>
+</div>
+  </div>
+</section>
+
+<!-- RESTAURANTS -->
+<section id="restaurants">
+  <div class="rest-list">
+    <div class="card">
+       <img src="https://b.zmtcdn.com/data/pictures/chains/1/18697301/a3f876979c7b1a123ff8d0548d774cb1.jpg" alt="Pizza Express">
+  <h3>Pizza Express</h3>
+      <p>Delicious pizzas, pasta & fast food items.</p>
+    </div>
+    <div class="card">
+      <img src="https://b.zmtcdn.com/data/pictures/3/19590373/f48430d05c2b4aa35984df9c391ac9c2.jpg" alt="Biryani House">
+  <h3>Biryani House</h3>
+      <p>Authentic Indian biryanis and kebabs.</p>
+    </div>
+    <div class="card">
+      <img src="https://b.zmtcdn.com/data/pictures/6/3100946/5c33fc6e7b1bdae7af3f25aa9fc4b8f2.jpeg" alt="Juice Junction">
+  <h3>Juice Junction</h3>
+      <p>Fresh fruit juices and milkshakes.</p>
+    </div>
+    <div class="card">
+        <img src="https://b.zmtcdn.com/data/collections/3b1f56c1936a6bfa702efd28188ebe6f_1688043266.png" alt="Sweet Tooth">
+  <h3>Sweet Tooth</h3>
+      <p>Desserts, pastries, and ice creams.</p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="reviews">
+    <div class="review">
+      <h3>Rahul Kumar ⭐⭐⭐⭐⭐</h3>
+      <p>Pizza Express has the crispiest crust and amazing cheese flavor!</p>
+    </div>
+    <div class="review">
+      <h3>Neha Patel ⭐⭐⭐⭐</h3>
+      <p>The biryani from Hyderabadi Biryani House was absolutely delicious!</p>
+    </div>
+    <div class="review">
+      <h3>Vikas Mehra ⭐⭐⭐⭐⭐</h3>
+      <p>Juice Junction’s mango milkshake is a must try!</p>
+    </div>
+    <div class="review">
+      <h3>Priya Das ⭐⭐⭐⭐</h3>
+      <p>Loved the chocolate brownie from Sweet Tooth 🍫</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <h2>Contact Us</h2>
+  <p>We’d love to hear from you! Reach out for feedback, suggestions, or collaborations.</p>
+  <form>
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<style>
+  .contact-section {
+    background: url('https://abhi16245.github.io/Zomato-clone/Content/image/food.png') center/cover no-repeat;
+    padding: 80px 20px;
+    color: #fff;
+    text-align: center;
+    position: relative;
+  }
+
+  .contact-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+  }
+
+  .contact-section h2,
+  .contact-section p,
+  .contact-section form {
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+  }
+
+  .contact-section p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+  }
+
+  .contact-section form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .contact-section input,
+  .contact-section textarea {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  .contact-section button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .contact-section button:hover {
+    background-color: #e63e3e;
+  }
+</style>
+
+<footer>
+  © 2025 <span>Zomato Clone</span> | Built by Nagamani 🍴
+</footer>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));
+  event.target.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function search(){
+  const val=document.getElementById("search").value.trim();
+  if(!val) alert("Please enter something to search 🍕");
+  else alert(`Searching for "${val}" near you 🚴‍♂️`);
+}
+
+function sendMsg(e){
+  e.preventDefault();
+  const name=document.getElementById('name').value;
+  alert(`Thank you ${name}! Your message has been sent 📩`);
+}
+</script>
 </body>
 </html>
-
